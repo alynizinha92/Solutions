@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.sql.*;
+import DAO.ModuloConexao;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -12,12 +15,35 @@ import javax.swing.JTextField;
  * @author As.tec
  */
 public class Login extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    public void logar(){
+      String sql = "select * from tbcliente where nomeCliente=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtEmail.getText());
+            //pst.setString(2, txtSenha.getText());
+            rs = pst.executeQuery();
+            if(rs.next()){
+            Principal objPrincipal = new Principal();
+            objPrincipal.setVisible(true);
+            this.dispose();
+            }else{
+            JOptionPane.showMessageDialog(null, "Usuário inválido");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        conexao = ModuloConexao.conector();
+        System.out.println(conexao);
     }
 
     /**
@@ -62,7 +88,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnProximo.setBackground(new java.awt.Color(51, 153, 255));
+        btnProximo.setBackground(new java.awt.Color(0, 102, 204));
         btnProximo.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnProximo.setForeground(new java.awt.Color(255, 255, 255));
         btnProximo.setText("Próximo");
@@ -124,10 +150,10 @@ public class Login extends javax.swing.JFrame {
 
         criarconta.setText("Criar uma conta");
         criarconta.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 criarcontaCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -180,7 +206,7 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(506, 551));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,6 +220,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         // TODO add your handling code here:
+        logar();
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
