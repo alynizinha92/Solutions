@@ -5,6 +5,10 @@
  */
 package View;
 
+import java.text.DateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuário
@@ -78,11 +82,13 @@ public class Principal extends javax.swing.JFrame {
 
         menCadUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsu.setText("Usuários");
+        menCadUsu.setEnabled(false);
         menCad.add(menCadUsu);
 
         navMenu.add(menCad);
 
         menRel.setText("Relatório");
+        menRel.setEnabled(false);
 
         menRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menRelServ.setText("Serviços");
@@ -107,6 +113,11 @@ public class Principal extends javax.swing.JFrame {
 
         menOpcSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menOpcSair.setText("Sair");
+        menOpcSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menOpcSairActionPerformed(evt);
+            }
+        });
         menOpc.add(menOpcSair);
 
         navMenu.add(menOpc);
@@ -153,6 +164,16 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menRelServActionPerformed
 
+    private void menOpcSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menOpcSairActionPerformed
+        // TODO add your handling code here:
+        
+        int sair = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja sair?","Aviso!",JOptionPane.YES_NO_OPTION);
+
+        if(sair == JOptionPane.YES_OPTION){
+        dispose();
+        }
+    }//GEN-LAST:event_menOpcSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,10 +219,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menCad;
     private javax.swing.JMenuItem menCadCli;
     private javax.swing.JMenuItem menCadOS;
-    private javax.swing.JMenuItem menCadUsu;
+    public static javax.swing.JMenuItem menCadUsu;
     private javax.swing.JMenu menOpc;
     private javax.swing.JMenuItem menOpcSair;
-    private javax.swing.JMenu menRel;
+    public static javax.swing.JMenu menRel;
     private javax.swing.JMenuItem menRelServ;
     private javax.swing.JMenuBar navMenu;
     // End of variables declaration//GEN-END:variables
