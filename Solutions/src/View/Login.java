@@ -27,9 +27,18 @@ public class Login extends javax.swing.JFrame {
             //pst.setString(2, txtSenha.getText());
             rs = pst.executeQuery();
             if(rs.next()){
+            String perfil = rs.getString(6);
+            if(perfil.equals("admin")){
+            Principal objPrincipal = new Principal();
+            objPrincipal.setVisible(true);
+            Principal.menRel.setEnabled(true);
+            Principal.menCadUsu.setEnabled(true);
+            this.dispose();
+            }else{
             Principal objPrincipal = new Principal();
             objPrincipal.setVisible(true);
             this.dispose();
+            }
             }else{
             JOptionPane.showMessageDialog(null, "Usuário inválido");
             }
