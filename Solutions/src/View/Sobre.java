@@ -36,7 +36,7 @@ public class Sobre extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel1.setText("<html>\n<center>\nEste projeto foi desenvolvido por alunos  do 3º ano de Informática 2017 <br/> da EEEP Antônio Rodrigues de Oliveira na disciplina de Laboratório de Software <br/> do professor Cláudio Matias.\n</center>\n<html>"); // NOI18N
+        jLabel1.setText("<html> <center> Esse projeto foi desenvolvido por alunos  do 3º ano de Informática 2017 <br/> da EEEP Antônio Rodrigues de Oliveira na disciplina de Laboratório de Software <br/> do professor Cláudio Matias. </center> <html>"); // NOI18N
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logosolutions.png"))); // NOI18N
 
