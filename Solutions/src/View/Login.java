@@ -7,6 +7,7 @@ package View;
 
 import java.sql.*;
 import DAO.ModuloConexao;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -33,10 +34,13 @@ public class Login extends javax.swing.JFrame {
             objPrincipal.setVisible(true);
             Principal.menRel.setEnabled(true);
             Principal.menCadUsu.setEnabled(true);
+            Principal.lblUsuario.setText(rs.getString(2));
+            Principal.lblUsuario.setForeground(Color.red);
             this.dispose();
             }else{
             Principal objPrincipal = new Principal();
             objPrincipal.setVisible(true);
+            Principal.lblUsuario.setText(rs.getString(2));
             this.dispose();
             }
             }else{
