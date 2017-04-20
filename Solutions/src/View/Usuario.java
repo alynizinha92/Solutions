@@ -9,15 +9,48 @@ package View;
  *
  * @author aline
  */
+import java.sql.*;
+import DAO.ModuloConexao;
+import javax.swing.JOptionPane;
+
 public class Usuario extends javax.swing.JInternalFrame {
 
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form Usuario
      */
     public Usuario() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    
+    private void consultar(){
+    String sql = "select * from usuario where cod_usuario = ? ";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1,txtUsuID.getText());
+            rs=pst.executeQuery();
+            if (rs.next()) {
+                txtUsuNome.setText(rs.getString(2));
+                txtUsuFone.setText(rs.getString(3));
+                txtUsuLogin.setText(rs.getString(4));
+                txtUsuSenha.setText(rs.getString(5));
+                cboUsuperfil.setSelectedItem(rs.getString(6));
+            } else {
+                JOptionPane.showMessageDialog(null,"Usuário não cadastrado");
+                
+                txtUsuNome.setText(null);
+                txtUsuFone.setText(null);
+                txtUsuLogin.setText(null);
+                txtUsuSenha.setText(null);
+                cboUsuperfil.setSelectedItem(null);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +100,11 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         btnUsuRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/read.png"))); // NOI18N
         btnUsuRead.setToolTipText("Consultar");
+        btnUsuRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuReadActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/update.png"))); // NOI18N
         jButton3.setToolTipText("Atualizar");
@@ -165,6 +203,11 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         setBounds(0, 0, 640, 479);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUsuReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuReadActionPerformed
+        // chama o método Consultar
+        consultar();
+    }//GEN-LAST:event_btnUsuReadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
