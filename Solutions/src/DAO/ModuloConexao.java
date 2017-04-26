@@ -16,7 +16,7 @@ public class ModuloConexao {
     public static Connection conector(){
      Connection conexao = null;
      String driver = "com.mysql.jdbc.Driver";
-     String url = "jdbc:mysql://localhost:3306/nomebd";
+     String url = "jdbc:mysql://localhost:3333/solutions";
      String user = "root";
      String password = "admin";
      //Tratamento de erros
