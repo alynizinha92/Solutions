@@ -79,6 +79,11 @@ public class Principal extends javax.swing.JFrame {
 
         menCadCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menCadCli.setText("Cliente");
+        menCadCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadCliActionPerformed(evt);
+            }
+        });
         menCad.add(menCadCli);
 
         menCadOS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
@@ -115,6 +120,11 @@ public class Principal extends javax.swing.JFrame {
 
         menAjuSob.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         menAjuSob.setText("Sobre");
+        menAjuSob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menAjuSobActionPerformed(evt);
+            }
+        });
         menAju.add(menAjuSob);
 
         navMenu.add(menAju);
@@ -197,6 +207,20 @@ public class Principal extends javax.swing.JFrame {
         telaUsuario.setVisible(true);
         Desktop.add(telaUsuario);
     }//GEN-LAST:event_menCadUsuActionPerformed
+
+    private void menAjuSobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAjuSobActionPerformed
+        // TODO add your handling code here:
+        Sobre telaSobre = new Sobre();
+        telaSobre.setVisible(true);
+        
+    }//GEN-LAST:event_menAjuSobActionPerformed
+
+    private void menCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCliActionPerformed
+        // TODO add your handling code here:
+        Cliente telaCliente = new Cliente();
+        telaCliente.setVisible(true);
+        Desktop.add(telaCliente);
+    }//GEN-LAST:event_menCadCliActionPerformed
 
     /**
      * @param args the command line arguments

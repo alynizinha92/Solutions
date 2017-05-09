@@ -21,14 +21,14 @@ public class Login extends javax.swing.JFrame {
     ResultSet rs = null;
     
     public void logar(){
-      String sql = "select * from usuario where nome_usuario=? and senha_usuario=?";
+      String sql = "select * from usuario where login_usuario=? and senha_usuario=?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtEmail.getText());
             pst.setString(2, txtSenha.getText());
             rs = pst.executeQuery();
             if(rs.next()){
-            String perfil = rs.getString(4);
+            String perfil = rs.getString(6);
             if(perfil.equals("admin")){
             Principal objPrincipal = new Principal();
             objPrincipal.setVisible(true);
