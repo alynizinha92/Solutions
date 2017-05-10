@@ -29,14 +29,17 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 
 -- Copiando estrutura para tabela solutions.equipamento
-CREATE TABLE IF NOT EXISTS `equipamento` (
-  `cod_equipamento` int(11) NOT NULL,
-  `nome_equipamento` varchar(100) DEFAULT NULL,
-  `modelo_equipamento` varchar(100) DEFAULT NULL,
-  `observacoes_equipamentos` varchar(100) DEFAULT NULL,
-  `cor_equipamento` varchar(100) DEFAULT NULL,
-  `caracteristicas_equipametos` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`cod_equipamento`)
+CREATE TABLE IF NOT EXISTS `os` (
+  `os_os` int(11) auto_increment NOT NULL,
+  `data_os` timestamp default CURRENT_TIMESTAMP,
+  `equipamento_os` varchar(100) NOT NULL,
+  `defeito_os` varchar(100) NOT NULL,
+  `servico_os` varchar(100) DEFAULT NULL,
+  `tecnico_os` varchar(50) DEFAULT NULL,
+  `valor_os` decimal(10,2) NOT NULL,
+  `cod_cliente` int not null,
+  foreign key(cod_cliente) references cliente(cod_cliente),
+  PRIMARY KEY (`os_os`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
@@ -44,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `equipamento` (
 
 -- Copiando estrutura para tabela solutions.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `cod_usuario` int(11) NOT NULL,
+  `cod_usuario`  int(11) NOT NULL,
   `nome_usuario` varchar(100) DEFAULT NULL,
   `fone_usuario` varchar(20) DEFAULT NULL,
   `login_usuario` varchar(50) DEFAULT NULL UNIQUE,
@@ -53,4 +56,4 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`cod_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SELECT * FROM `usuario`;
-INSERT INTO `usuario` (`nome_usuario`, `fone_usuario`, `login_usuario`, `senha_usuario`, `perfil_usuario`  ) VALUES ("Lucas Amorim", "9999999", "lucasamorim", "lucasamorim", "admin");
+INSERT INTO `usuario` (`cod_usuario`, `nome_usuario`, `fone_usuario`, `login_usuario`, `senha_usuario`, `perfil_usuario`  ) VALUES (0, "Lucas Amorim", "9999999", "lucasamorim", "lucasamorim", "admin");
