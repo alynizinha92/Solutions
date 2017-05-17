@@ -14,6 +14,9 @@ public class OS extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
+    private String tipo;
+    
+    
     /**
      * Creates new form OS
      */
@@ -35,6 +38,40 @@ public class OS extends javax.swing.JInternalFrame {
         private void setar_campos(){
         int setar = tblClientes.getSelectedRow();
         txtCliId.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
+        }
+        
+        private void emitir_os(){
+            String sql = "insert into os(tipo_os,situacao_os,equipamento_os,defeito_os,servico_os,tecnico_os,valor_os,cod_cliente) values(?,?,?,?,?,?,?,?)";
+            try {
+                pst=conexao.prepareStatement(sql);
+                pst.setString(1, tipo);
+                pst.setString(2, cboOsSit.getSelectedItem().toString());
+                pst.setString(3, txtOsEquip.getText());
+                pst.setString(4, txtOsDef.getText());
+                pst.setString(5, txtOsServ.getText());
+                pst.setString(6, txtOsTec.getText());
+                pst.setString(7, txtOsValor.getText());
+                pst.setString(8, txtCliId.getText());
+                
+                if ((txtCliId.getText().isEmpty())||(txtOsEquip.getText().isEmpty())||(txtOsDef.getText().isEmpty())) {
+                    JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
+                } else {
+                    int adicionado = pst.executeUpdate();
+                    if (adicionado > 0){
+                      JOptionPane.showMessageDialog(null, "OS emitido com  sucesso.");  
+                     txtCliId.setText(null);
+                     txtOsEquip.setText(null);
+                     txtOsDef.setText(null);
+                     txtOsTec.setText(null);
+                     txtOsValor.setText(null);
+                     
+                    
+                    
+                    }}
+             
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,e);
+            }
         }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +120,23 @@ public class OS extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("OS");
         setPreferredSize(new java.awt.Dimension(640, 492));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -96,9 +150,19 @@ public class OS extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(rbtOrc);
         rbtOrc.setText("Orçamento");
+        rbtOrc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtOrcActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbtOs);
         rbtOs.setText("Ordem de Serviço");
+        rbtOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtOsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +201,12 @@ public class OS extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Situação");
 
-        cboOsSit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrega Ok", "Orçamento REPROVADO", "Aguardando aprovação", "Aguardando peça", "Abandonado pelo cliente", "Na bancada", "Retornou" }));
+        cboOsSit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Na bancada", "Entrega Ok", "Orçamento REPROVADO", "Aguardando aprovação", "Aguardando peça", "Abandonado pelo cliente", "Retornou" }));
+        cboOsSit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboOsSitActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
@@ -223,8 +292,15 @@ public class OS extends javax.swing.JInternalFrame {
             }
         });
 
+        txtOsValor.setText("0");
+
         btnOsAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/create.png"))); // NOI18N
         btnOsAdicionar.setToolTipText("Adicionar");
+        btnOsAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOsAdicionarActionPerformed(evt);
+            }
+        });
 
         btnOsPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/read.png"))); // NOI18N
         btnOsPesquisar.setToolTipText("Consultar");
@@ -356,6 +432,28 @@ public class OS extends javax.swing.JInternalFrame {
         // chamando o metodo setar campos
         setar_campos();
     }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void rbtOrcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOrcActionPerformed
+        tipo = "Orçamento";
+    }//GEN-LAST:event_rbtOrcActionPerformed
+
+    private void rbtOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOsActionPerformed
+        tipo = "OS";
+    }//GEN-LAST:event_rbtOsActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        rbtOrc.setSelected(true);
+        tipo = "Orçamento";
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void cboOsSitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboOsSitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboOsSitActionPerformed
+
+    private void btnOsAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOsAdicionarActionPerformed
+      //chamar método emitir_os
+        emitir_os ();
+    }//GEN-LAST:event_btnOsAdicionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

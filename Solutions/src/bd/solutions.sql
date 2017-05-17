@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 CREATE TABLE IF NOT EXISTS `os` (
   `os_os` int(11) auto_increment NOT NULL,
   `data_os` timestamp default CURRENT_TIMESTAMP,
+  `tipo_os` varchar(15) NOT NULL,
+  `situcao_os` varchar(20) NOT NULL,
   `equipamento_os` varchar(100) NOT NULL,
   `defeito_os` varchar(100) NOT NULL,
   `servico_os` varchar(100) DEFAULT NULL,
