@@ -73,6 +73,12 @@ public class OS extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,e);
             }
         }
+        //metodo para pesquisar uma ordem de os 
+        private void pesquisar_os(){
+        //linha abaixo cria uma caixa de entrada do tipo JOption Pane 
+           String num_os = JOptionPane.showInputDialog("Numero do OS");
+           String sql= " select * from tbos where os= " + num_os;
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -420,7 +426,8 @@ public class OS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOsEquipActionPerformed
 
     private void btnOsPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOsPesquisarActionPerformed
-        // TODO add your handling code here:
+        //chamar o metodo pesquisar_os
+        pesquisar_os ();
     }//GEN-LAST:event_btnOsPesquisarActionPerformed
 
     private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
